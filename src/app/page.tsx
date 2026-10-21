@@ -544,8 +544,11 @@ export default function DashboardPage() {
             <span className="font-semibold tracking-tight text-gray-900 text-sm">Mavly</span>
           </Link>
           <div className="flex items-center gap-2">
-            <Link href="/">
+            <Link href="/home">
               <button className="text-xs text-gray-500 hover:text-gray-700 px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors">Home</button>
+            </Link>
+            <Link href="/login">
+              <button className="text-xs text-gray-700 hover:text-gray-950 font-medium px-2.5 py-1.5 rounded-lg hover:bg-black/5 transition-colors">Sign in</button>
             </Link>
           </div>
         </div>

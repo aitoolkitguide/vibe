@@ -1,0 +1,943 @@
+# Mavly — Complete Homepage Implementation Prompt
+
+## Objective
+
+Build a premium, modern, fully responsive homepage for **Mavly** at the exact route:
+
+`/home`
+
+This must be implemented inside the existing Mavly project and follow the project's actual architecture, design system, component conventions, routing patterns, and coding standards.
+
+This is a frontend-only task. The primary goal is to communicate how Mavly coordinates specialised AI agents through an immersive, animated visual experience rather than presenting a conventional product dashboard screenshot.
+
+The homepage should feel sophisticated, interactive, polished, and distinctive. It must look like a natural extension of the existing Mavly product, not a separately designed template.
+
+Do not stop after presenting a plan or mockup. Inspect the repository, implement the complete homepage, and verify the result.
+
+---
+
+# PHASE 1 — INSPECT THE EXISTING PROJECT FIRST
+
+Before writing or modifying code, inspect the repository and understand the current implementation.
+
+### 1. Inspect the technology stack
+
+Determine the existing:
+
+- Frontend framework and its version.
+- Project structure and routing conventions.
+- CSS architecture, styling methodology, and design tokens.
+- Shared components and layout primitives.
+- Existing animation libraries and animation conventions.
+- Installed icon libraries and typography.
+- Existing responsive breakpoints and accessibility patterns.
+- Current application entry points and authentication-related navigation.
+
+Do not assume that the project uses a particular framework, CSS library, component library, or routing system.
+
+Use the project's existing architecture and conventions.
+
+### 2. 🎨 Colour inspection first — mandatory
+
+Before designing the homepage, inspect the actual existing colour palette and design system.
+
+Inspect relevant files, including where applicable:
+
+- Global stylesheets.
+- CSS custom properties and variables.
+- Theme provider and theme configuration.
+- Tailwind or other styling configuration.
+- Shared component styles.
+- Existing backgrounds, surfaces, borders, shadows, typography, and interactive states.
+- Light/dark mode support, if present.
+
+Identify the actual colours and tokens already being used throughout Mavly.
+
+**Do not invent, prescribe, replace, or impose a new colour palette. Do not blindly copy the colours from the supplied reference image.**
+
+Use the existing project's real colour tokens consistently for every section, animation, card, button, background, decorative element, and interaction.
+
+If a new token is genuinely necessary, derive it from the established design system and preserve the existing visual identity. Avoid unnecessary hardcoded colour values.
+
+If the project supports multiple themes, ensure the new page respects those themes instead of breaking them.
+
+### 3. Inspect existing routes and integrations
+
+Before creating `/home`:
+
+- Verify whether this route already exists.
+- Understand the existing route structure and any route conflicts.
+- Inspect current signup, login, beta access, and dashboard destinations.
+- Identify existing reusable frontend components that can be reused safely.
+
+Create or update the `/home` page using the routing convention already established in the repository.
+
+Do not replace the existing root `/` page, change the default redirect, modify authentication redirects, or alter protected-route behaviour merely to expose `/home`.
+
+Keep all existing routes and flows working as before.
+
+---
+
+# PHASE 2 — STRICT SCOPE BOUNDARY
+
+## 🔒 Frontend only
+
+Only modify what is necessary to implement the homepage on the frontend.
+
+Allowed work includes:
+
+- New or updated frontend page components.
+- Reusable frontend-only components for the homepage.
+- Page-specific styles and animations.
+- Responsive layouts.
+- Frontend assets and diagrams.
+- Existing frontend routing files, only as necessary to register `/home`.
+- Reusing current client-side navigation and signup links.
+
+**Do not modify any of the following:**
+
+- Backend implementation or business logic.
+- API routes or API handlers.
+- Server-side services or server functions.
+- Database schemas, queries, migrations, or stored data.
+- Authentication or authorisation logic.
+- Signup, login, session, or protected-route implementations.
+- Environment variables or environment configuration files.
+- Third-party integrations or integration credentials.
+- Existing agent execution infrastructure.
+- Existing orchestration logic or job-processing mechanisms.
+- Existing deployment configuration.
+- Unrelated application pages or components.
+
+Do not make backend changes to support a decorative animation.
+
+If an existing frontend integration can be reused, use it without changing its underlying implementation. If something is unavailable, build the appropriate frontend presentation without inventing an API or altering backend behaviour.
+
+Do not introduce unnecessary dependencies. Prefer existing libraries and native browser capabilities.
+
+---
+
+# PHASE 3 — DESIGN DIRECTION
+
+## Premium Neumorphism / Soft UI
+
+Use a refined Neumorphic / Soft UI treatment that is compatible with Mavly's existing visual identity.
+
+Neumorphism should add depth and tactility without sacrificing readability, contrast, usability, or performance.
+
+Apply the treatment selectively through:
+
+- Softly elevated surfaces.
+- Subtle dual-light and dual-dark shadows.
+- Restrained raised cards and UI elements.
+- Extruded buttons with clear interactive states.
+- Pressed or inset surfaces where appropriate.
+- Carefully layered surfaces for the agent visualisation.
+- Smooth, restrained transitions.
+- Consistent corner radii and spacing based on the existing design system.
+
+All shadow tones and surface colours must be derived from the existing theme. Do not create an independent neumorphic colour system.
+
+Avoid excessive shadows, indistinct borders, low-contrast text, plastic-looking components, and repetitive rounded cards.
+
+Not every section needs to be inside a card. Use typography, whitespace, composition, and background transitions to establish visual hierarchy.
+
+The final result should feel like a premium software product, not a generic landing-page template.
+
+## Visual language
+
+The homepage should communicate:
+
+- Intelligence.
+- Coordination.
+- Specialisation.
+- Connected workflows.
+- Controlled execution.
+- Clarity.
+- Confidence.
+
+Use a combination of typography, connected diagrams, animated signals, nodes, carefully layered surfaces, and negative space.
+
+Avoid unnecessary decorative gradients, excessive glowing effects, oversized emoji, generic stock illustrations, and unrelated dashboard mockups.
+
+Respect the existing typography and brand identity.
+
+---
+
+# PHASE 4 — COMPLETE HOMEPAGE STRUCTURE
+
+Implement the following sections in the specified order.
+
+The navigation is a shared page element, followed by nine content sections.
+
+## SECTION 00 — Navigation
+
+### Purpose
+
+Help visitors navigate the homepage and access the beta without overwhelming the interface.
+
+### Requirements
+
+Include:
+
+- Existing Mavly logo or branding.
+- Links to relevant homepage sections.
+- A prominent but restrained "Join Beta" CTA.
+- Responsive mobile navigation.
+- A sticky or compact scrolling state only if it fits the existing design conventions.
+
+Suggested anchor destinations:
+
+- How it works.
+- Agents.
+- Use cases.
+- Pricing.
+- FAQ.
+
+Use accessible navigation, visible focus states, and meaningful link labels.
+
+Connect each link to the appropriate section or verified existing destination.
+
+Do not create unnecessary navigation pages or invent URLs.
+
+---
+
+## SECTION 01 — Hero
+
+### Objective
+
+Communicate what Mavly does within the first few seconds.
+
+The hero must explain Mavly's multi-agent approach instead of presenting a dashboard screenshot.
+
+### Suggested headline
+
+"One goal. Multiple specialised agents."
+
+Suggested supporting copy:
+
+"Mavly coordinates planning, specialised development agents, and execution to help turn ideas into working implementations."
+
+Treat this copy as the initial direction. Adjust it if inspection of the actual product reveals more accurate positioning.
+
+### Elements
+
+- Clear headline.
+- Concise supporting description.
+- Primary CTA: "Join Beta".
+- Secondary CTA: "Explore the system".
+- A visually compelling animated preview of the agent workflow.
+- Balanced whitespace and strong visual hierarchy.
+
+The primary CTA must use the existing beta or signup destination if one is available.
+
+The secondary CTA must scroll smoothly to the Explore Mavly section.
+
+### Hero visual
+
+Create a lightweight preview of an agent-based workflow.
+
+Potential elements:
+
+- A user goal or task node.
+- A planning agent.
+- Connections representing task routing.
+- Frontend and backend agent nodes.
+- An execution agent.
+- Subtle animated signal movement.
+
+This preview must lead naturally into the more detailed Explore section.
+
+Do not display a fabricated dashboard or imply that the hero animation is live operational data.
+
+---
+
+## SECTION 02 — The Idea Behind Mavly
+
+### Objective
+
+Explain why coordinated specialised agents are useful.
+
+Suggested headline:
+
+"Complex work deserves more than a single step."
+
+Present the core idea clearly: software development involves different responsibilities, including planning, frontend implementation, backend implementation, and execution. Mavly's intended value is coordinating these responsibilities through specialised agents.
+
+Keep the content grounded in the actual product.
+
+### Visual treatment
+
+Use a restrained visual transition from separated responsibilities into a connected workflow.
+
+For example:
+
+1. Individual task or responsibility nodes appear separately.
+2. Connections are gradually established.
+3. The components form an organised system.
+
+Use a lightweight SVG or existing animation approach where appropriate.
+
+Trigger scroll-based animations carefully, avoid excessive motion, and respect reduced-motion preferences.
+
+Do not recreate the entire Explore diagram here. This section should introduce the concept; the next section should be its detailed visual demonstration.
+
+---
+
+## SECTION 03 — Explore Mavly: Signature Animated Agent System
+
+### Highest-priority section
+
+This is the defining visual experience of the homepage.
+
+The user has supplied a reference screenshot showing a connected visual network, a central element, external service-style nodes, horizontal and vertical lines, labels, junctions, and moving signals.
+
+Use that screenshot as inspiration for the visual composition and animation principles. Do not copy its palette, branding, or unrelated service logos.
+
+The goal is to translate that connected-network aesthetic into Mavly's own existing visual identity.
+
+**Do not show the actual Mavly dashboard in this section. Show how the Mavly agent system is organised and how work flows between specialised agents.**
+
+### Agent roles
+
+Build the visualisation around the following roles, adapting the exact connections to the real architecture found in the project.
+
+**1. User Goal / Task**
+
+Represents the task or requested outcome entering the system.
+
+**2. Planning Agent**
+
+Represents task understanding, planning, and organisation of the work.
+
+**3. Frontend Agent**
+
+Represents assigned frontend-related responsibilities, such as UI, components, or layouts, when supported by the actual product.
+
+**4. Backend Agent**
+
+Represents assigned backend-related responsibilities, such as APIs, data flows, or application logic, when supported by the actual product.
+
+**5. Execution Agent**
+
+Represents implementation of the tasks assigned to the execution role.
+
+Preserve these role distinctions. Do not introduce fictional agents, unsupported capabilities, or additional execution stages simply to fill the layout.
+
+If the codebase reveals that the real architecture differs, represent the verified implementation rather than the conceptual example.
+
+### Visual architecture
+
+Create a spacious, polished, connected network with:
+
+- Thin connected paths.
+- Clear node hierarchy.
+- Carefully arranged horizontal and vertical connectors.
+- Junctions where relevant.
+- Distinct but theme-consistent agent nodes.
+- Short labels and concise explanations.
+- Subtle depth from the existing design system's Soft UI treatment.
+- Animated signals travelling along connections.
+- Clear separation between inactive and active states.
+- Desktop and mobile layouts designed intentionally.
+
+Use SVG or another suitable lightweight approach for drawing connections and signal movement.
+
+Ensure connectors remain correctly aligned with their nodes at different viewport sizes.
+
+Avoid random line intersections, overlapping labels, clipped elements, disconnected paths, and unnecessarily dense layouts.
+
+### Animation sequence
+
+Create a cohesive continuous animation that explains the workflow.
+
+**Stage A — Incoming task**
+
+The task node becomes active and a subtle signal enters the system.
+
+**Stage B — Planning**
+
+The Planning Agent becomes active. A signal travels along its outgoing connection to represent the planning stage.
+
+**Stage C — Specialised work**
+
+The Frontend Agent and Backend Agent can activate in parallel if that accurately represents the existing workflow.
+
+Each node should have a restrained activity state, with animated signals travelling along its associated paths.
+
+**Stage D — Execution**
+
+Signals progress to the Execution Agent to illustrate how assigned implementation work is executed.
+
+**Stage E — Completion**
+
+The visualisation indicates completion using a subtle, theme-consistent state. The animation then resets smoothly and repeats.
+
+These stages are illustrative, not actual live execution events. Clearly avoid presenting them as real-time job telemetry.
+
+If the current implementation uses a different ordering, branching behaviour, or handoff mechanism, the animation must reflect that reality.
+
+### Interaction
+
+If it fits the design:
+
+- Hovering over an agent reveals a concise description.
+- Clicking or activating an agent reveals more information or toggles an accessible information panel.
+- Active nodes receive subtle visual emphasis.
+- Labels remain readable throughout the animation.
+- Keyboard users can access interactive nodes and their information.
+
+Do not make the animation dependent on clicking through every stage.
+
+The default experience should immediately communicate a coherent workflow to a first-time visitor.
+
+### Responsive treatment
+
+On desktop, use a spacious composition inspired by the supplied wide reference screenshot.
+
+On smaller screens, redesign the composition into a compact or vertical network with readable labels and simplified connectors.
+
+Do not shrink the desktop diagram until everything becomes illegible.
+
+### Performance and accessibility
+
+- Prefer lightweight SVG and CSS animations where practical.
+- Use animation libraries already installed in the project if appropriate.
+- Avoid introducing a large new dependency just for moving lines.
+- Avoid unnecessary continuous JavaScript rendering.
+- Respect `prefers-reduced-motion`.
+- Preserve meaningful static content if animations are disabled.
+- Maintain readable contrast and visible focus states.
+
+The Explore section must feel alive without becoming visually noisy.
+
+---
+
+## SECTION 04 — How It Works
+
+### Objective
+
+Explain the product workflow in simple language after visitors have explored its animated architecture.
+
+Use four concise steps.
+
+**Step 1 — Define the goal**
+
+The user provides a task or desired outcome.
+
+**Step 2 — Plan the work**
+
+The Planning Agent organises the work according to the task.
+
+**Step 3 — Delegate to specialists**
+
+Relevant responsibilities are assigned to the appropriate specialised agents.
+
+**Step 4 — Execute the implementation**
+
+The Execution Agent carries out its assigned implementation work.
+
+Use these as initial content labels and verify them against the actual application workflow.
+
+### Design
+
+- Four clear sequential steps.
+- A simple line or connector between steps.
+- Small icons from the existing icon library.
+- Short, readable descriptions.
+- Optional restrained scroll-triggered emphasis.
+
+Do not create another oversized multi-agent network here. This section should be simpler than Explore Mavly and reinforce the same concept without repeating the same visual experience.
+
+Do not invent validation, approval, testing, or deployment stages if they are not supported by the product.
+
+---
+
+## SECTION 05 — What You Can Build
+
+### Objective
+
+Show the practical value of Mavly through relevant tasks, not a generic inventory of AI features.
+
+Use three or four carefully selected use cases based on the project's actual capabilities.
+
+Potential content directions:
+
+**Build the Interface**
+
+Frontend-related UI and component implementation tasks.
+
+**Implement the Logic**
+
+Backend-related implementation responsibilities, only where supported.
+
+**Plan Complex Work**
+
+Breaking down a broader development objective into organised tasks.
+
+**Coordinate Execution**
+
+Managing assigned implementation work through a coordinated workflow.
+
+### Design
+
+Use a varied, responsive composition with concise headings, useful explanations, and restrained visual assets.
+
+Prefer original diagrams, lightweight interface illustrations, or theme-consistent abstract visuals over generic stock imagery.
+
+Do not display fabricated customer examples, fictional integrations, fake product screenshots, or unsupported capabilities.
+
+Every use case must accurately reflect what the existing Mavly product can do.
+
+If a proposed use case is not currently supported, omit it or reframe it as a future possibility only when appropriate and clearly labelled.
+
+---
+
+## SECTION 06 — Why Mavly
+
+### Objective
+
+Explain the benefits of the product's coordinated multi-agent approach and reinforce trust.
+
+Use three concise themes:
+
+**Specialised Responsibilities**
+
+Separate agent roles make it easier to understand which responsibilities are handled by which agents.
+
+**Coordinated Workflows**
+
+The intended value lies in organising and coordinating related tasks rather than merely presenting isolated tools.
+
+**An Understandable System**
+
+The visualisation helps visitors understand how work is planned, routed, and executed, to the extent supported by the actual product.
+
+### Design
+
+Use elegant typography, carefully composed content, and restrained visual emphasis.
+
+Avoid generic marketing filler or repeated feature cards.
+
+Do not make unsupported claims about speed, reliability, productivity improvements, autonomy, or model performance.
+
+Do not invent customer testimonials, client logos, user statistics, ratings, awards, or social proof.
+
+At the beta stage, honest communication is more important than inflated claims.
+
+---
+
+## SECTION 07 — Pricing
+
+### Objective
+
+Add a dedicated, polished pricing section that fits the existing homepage narrative and encourages the correct next step.
+
+The pricing section is mandatory, even if the final pricing model has not yet been established.
+
+### Step 1 — Inspect existing pricing information
+
+Before creating the section, check whether the existing project contains verified:
+
+- Plan names.
+- Prices and billing intervals.
+- Feature entitlements.
+- Usage limits.
+- Free trial or beta terms.
+- Upgrade destinations.
+- Current pricing copy.
+
+Reuse verified information if it exists.
+
+Do not modify backend billing logic or subscription infrastructure.
+
+Do not invent prices, plan names, usage limits, enterprise features, discounts, trial periods, or subscription promises.
+
+### Step 2 — Render the appropriate pricing experience
+
+**If verified pricing plans already exist:**
+
+Present them in an accessible, easy-to-compare layout.
+
+For each existing plan, display only confirmed details:
+
+- Plan name.
+- Verified price and billing period.
+- Relevant included capabilities.
+- Actual restrictions, when known.
+- The appropriate existing action.
+
+Highlight a recommended plan only if there is a defensible reason and the designation is supported by existing product or business information.
+
+Do not introduce a fake "Most Popular" badge.
+
+**If pricing has not been established:**
+
+Still implement a dedicated Pricing section, but use honest, intentional pre-launch pricing content.
+
+Suggested direction:
+
+Headline: "Pricing that grows with your workflow."
+
+Supporting text: "We're finalising Mavly's pricing as we prepare for beta. Join the beta to get updates when pricing and access details are announced."
+
+Primary action: "Join Beta"
+
+Secondary information, if appropriate: "Pricing details will be announced closer to launch."
+
+Use the actual launch and beta status verified from the project. If the launch timing or pricing announcement timing is unknown, avoid promising a specific date.
+
+Do not display fabricated monthly or yearly prices simply to fill three pricing cards. Do not create fictional Starter, Pro, or Team tiers without verified evidence.
+
+### Pricing visual design
+
+The section should feel like a natural continuation of the homepage.
+
+Use the existing design system and a refined Neumorphic treatment with:
+
+- Subtle raised surfaces.
+- Clear typographic hierarchy.
+- Readable feature lists where applicable.
+- Tactile but accessible CTA buttons.
+- Responsive layout.
+- Consistent spacing.
+- Appropriate hover, focus, and pressed states.
+
+If multiple verified plans exist, make comparisons straightforward without creating an excessively dense feature matrix.
+
+If pricing is not yet available, use one strong, well-designed pricing announcement panel instead of pretending complete plans exist.
+
+All pricing CTAs must point to an existing and verified destination.
+
+---
+
+## SECTION 08 — Beta Access
+
+### Objective
+
+Convert interested visitors into genuine Mavly beta users.
+
+Suggested headline:
+
+"Be part of what we're building."
+
+Suggested supporting copy:
+
+"Get early access to Mavly and help shape the future of coordinated AI development."
+
+Treat these as draft messages that must remain accurate for the actual product and current beta availability.
+
+### Requirements
+
+- A prominent beta CTA.
+- A short explanation of how beta access works.
+- Clear wording about whether access is invitation-only, waitlist-based, or immediately available.
+- Reuse the project's existing signup or invitation flow where available.
+- Do not introduce another authentication system.
+- Do not create a new backend endpoint or database flow.
+- Do not invent an instant-access guarantee.
+- Do not promise benefits that have not been established.
+
+Make this section visually distinctive without repeating the hero exactly.
+
+The CTA should be clear and easy to use on mobile.
+
+---
+
+## SECTION 09 — FAQ and Footer
+
+### FAQ
+
+Implement a concise, accessible FAQ accordion using the existing component conventions.
+
+Potential questions:
+
+1. What is Mavly?
+2. How do Mavly's specialised agents work together?
+3. What does the Planning Agent do?
+4. Which tasks can Mavly execute today?
+5. How can I get beta access?
+6. Is Mavly currently available?
+7. How does Mavly's pricing work?
+
+Include only relevant questions. Every answer must reflect verified product capabilities and availability.
+
+Do not invent claims, dates, pricing policies, supported integrations, or technical capabilities.
+
+### FAQ interaction
+
+- Support keyboard interaction.
+- Include visible focus states.
+- Use semantic buttons and expanded/collapsed state attributes where appropriate.
+- Prevent awkward layout shifts where practical.
+- Avoid adding unnecessary dependencies.
+
+### Footer
+
+Include:
+
+- Mavly branding.
+- Relevant section navigation.
+- Verified contact or support links, if available.
+- Existing Privacy Policy and Terms links, if available.
+- Existing social links only when verified.
+
+Do not invent website destinations, email addresses, social accounts, or legal documents.
+
+Keep the footer understated and consistent with the rest of the page.
+
+---
+
+# PHASE 5 — MOTION, COMPONENTS, AND INTERACTIONS
+
+Use a consistent interaction language across the entire page.
+
+### Shared interaction requirements
+
+- Smooth but restrained scrolling.
+- Accessible hover, focus, active, and pressed states.
+- Thoughtful entrance animations.
+- No abrupt or excessive movement.
+- Consistent transition timing and easing.
+- No horizontal overflow on any supported viewport.
+- No accidental text selection prevention.
+- No custom cursor effects that impair usability.
+
+Use the existing animation infrastructure wherever possible.
+
+Avoid adding a new animation library unless absolutely necessary and justified.
+
+### Neumorphic controls
+
+Buttons, cards, and interactive surfaces should use shadow depth derived from existing theme tokens.
+
+Raised and pressed states should be visually clear without relying exclusively on shadows.
+
+Text contrast and control boundaries must remain sufficiently clear, including keyboard focus.
+
+Do not apply elaborate shadows to every element.
+
+### Text behaviour
+
+Keep normal browser text selection enabled. Do not add global `user-select: none` or unusual cursor behaviour to decorative or content-heavy elements.
+
+All copy should remain selectable, readable, and accessible.
+
+---
+
+# PHASE 6 — RESPONSIVENESS AND ACCESSIBILITY
+
+Test the page across desktop, tablet, and mobile layouts.
+
+At minimum, inspect representative widths around:
+
+- 360px.
+- 390px.
+- 768px.
+- 1024px.
+- 1440px.
+
+These are test targets, not a requirement to hardcode the layout to exact widths.
+
+### Responsive requirements
+
+- No horizontal overflow.
+- No clipped hero copy or navigation.
+- Readable typography and appropriate line lengths.
+- Properly scaled section spacing.
+- Responsive agent diagrams with aligned connectors.
+- Pricing layouts that remain easy to compare.
+- Touch-friendly controls.
+- No content hidden solely on mobile unless intentionally justified.
+- Reduced and simplified visual complexity on smaller screens where necessary.
+
+### Accessibility requirements
+
+- Semantic landmarks and heading hierarchy.
+- Accessible navigation and interactive components.
+- Keyboard-accessible controls.
+- Clearly visible focus indicators.
+- Suitable text and control contrast.
+- Descriptive accessible labels where necessary.
+- Appropriate alternative text for meaningful images.
+- Respect for `prefers-reduced-motion`.
+- No critical information communicated only through animation or colour.
+
+Do not compromise accessibility to achieve a visual effect.
+
+---
+
+# PHASE 7 — CODE QUALITY AND IMPLEMENTATION RULES
+
+### Reusability
+
+Organise the implementation according to the existing project conventions.
+
+Split the page into sensible reusable components when useful, such as:
+
+- HomePage.
+- HomeNavigation.
+- HeroSection.
+- IdeaSection.
+- ExploreAgentsSection.
+- HowItWorksSection.
+- UseCasesSection.
+- WhyMavlySection.
+- PricingSection.
+- BetaAccessSection.
+- FAQSection.
+- HomeFooter.
+
+These names are suggestions, not mandatory filenames. Follow the repository's established naming and component organisation.
+
+Avoid producing a single enormous component if the project is organised around reusable components.
+
+### Styling
+
+- Reuse existing tokens and shared utilities.
+- Keep homepage-specific styles organised.
+- Avoid global CSS changes that affect unrelated pages.
+- Avoid conflicting selectors and duplicated design tokens.
+- Do not introduce another competing design system.
+- Preserve existing component behaviour.
+- Use responsive layouts rather than fixed-width desktop compositions.
+- Keep animation code maintainable.
+
+### Dependency and asset discipline
+
+- Reuse installed dependencies.
+- Use the existing icon library.
+- Do not import random external logo collections.
+- Do not download unrelated brand logos from the reference screenshot.
+- Do not rely on remote imagery for the essential agent architecture.
+- Prefer CSS, SVG, and existing local assets for the main visualisation.
+- Avoid embedding large base64 assets in source code.
+
+### Routing
+
+The final homepage must be accessible at:
+
+`/home`
+
+Follow the existing routing system exactly.
+
+Keep root `/` unchanged unless a change is explicitly required later.
+
+Do not break current signup, login, dashboard, or protected routes.
+
+If the project already has a homepage component or a conflicting `/home` route, inspect its dependencies and carefully reconcile the implementation without affecting unrelated flows.
+
+### No unrelated refactoring
+
+Do not use this task as a reason to rewrite the application, reorganise the entire codebase, replace the UI framework, change authentication, or clean up unrelated backend code.
+
+Only implement the frontend work necessary for the new route and its supporting components/styles.
+
+---
+
+# PHASE 8 — TESTING AND FINAL VERIFICATION
+
+After implementation, do not assume the task is finished just because the page compiles.
+
+Perform the available verification steps within the existing project.
+
+### 1. Route verification
+
+- Confirm `/home` loads directly.
+- Confirm page refresh works on `/home`.
+- Confirm the route does not depend on first visiting `/`.
+- Confirm existing root, login, signup, and dashboard destinations remain unchanged.
+- Confirm page navigation and section anchors work.
+
+### 2. Functional verification
+
+- Test the primary beta CTA.
+- Test the Explore section's scroll CTA.
+- Test interactive agent nodes or information panels, if implemented.
+- Test FAQ expand/collapse behaviour.
+- Test pricing CTAs against verified destinations.
+- Confirm there are no dead links or misleading actions.
+
+### 3. Visual verification
+
+- Review the page at desktop, tablet, and mobile widths.
+- Check typography, spacing, alignment, shadows, and surfaces.
+- Check for overflow, overlapping nodes, broken connectors, and clipped labels.
+- Confirm the existing Mavly theme is consistently respected.
+- Check that neumorphism does not reduce text readability.
+- Confirm animations remain smooth and understandable.
+
+### 4. Technical verification
+
+Run relevant project checks where available:
+
+- Existing type checks.
+- Linting.
+- Production build.
+- Available frontend tests.
+
+Do not weaken or bypass existing checks to make the implementation pass.
+
+Fix issues introduced by this work. Do not expand the scope into unrelated existing problems.
+
+### 5. Scope verification
+
+Before finishing, inspect the diff and confirm that the task did not modify:
+
+- Backend or server logic.
+- API routes.
+- Database or migrations.
+- Authentication and authorisation.
+- Environment variables.
+- Integrations.
+- Existing agent execution behaviour.
+- Unrelated pages or application logic.
+
+Only the intended frontend changes should remain.
+
+If a check cannot be run due to the environment or existing project issues, state that clearly instead of claiming it passed.
+
+---
+
+# DEFINITION OF DONE
+
+The task is complete only when all applicable requirements below are satisfied:
+
+- [ ] A polished Mavly homepage exists at `/home`.
+- [ ] The existing Mavly colour palette and theme were inspected before styling.
+- [ ] No independent colour palette was imposed.
+- [ ] Neumorphic / Soft UI surfaces follow the existing design system.
+- [ ] The hero communicates Mavly's multi-agent approach.
+- [ ] The supplied reference screenshot informed the visual direction.
+- [ ] Explore Mavly contains a coherent animated agent workflow, not a dashboard screenshot.
+- [ ] Planning, frontend, backend, and execution roles are represented accurately.
+- [ ] Animation is responsive, lightweight, accessible, and clearly illustrative.
+- [ ] How It Works explains the workflow in simple steps.
+- [ ] Use cases and product claims are grounded in actual capabilities.
+- [ ] The Why Mavly section communicates meaningful benefits without fabricated claims.
+- [ ] A dedicated Pricing section exists, using verified pricing information or honest pre-launch messaging.
+- [ ] Beta access links reuse the existing frontend flow.
+- [ ] FAQ and footer are complete and accurate.
+- [ ] Desktop, tablet, and mobile layouts have been checked.
+- [ ] Text selection, keyboard navigation, and accessibility remain intact.
+- [ ] Existing application routes and behaviour remain unchanged.
+- [ ] No backend, API, database, authentication, environment, integration, or business-logic changes were made.
+- [ ] Relevant available checks have been run and their results accurately reported.
+
+# FINAL EXECUTION INSTRUCTION
+
+First inspect the repository and its existing theme. Then implement the complete homepage at `/home` according to this specification, using the project's actual architecture and reusable components.
+
+Do not replace the existing app with a standalone demo. Do not stop after planning. Do not invent product capabilities or prices. Do not change the backend.
+
+When finished, provide a concise implementation report containing:
+
+1. The files created or modified.
+2. Confirmation that `/home` works.
+3. A summary of the completed sections and agent animation.
+4. Pricing implementation details and whether verified pricing data was available.
+5. Relevant build, lint, type-check, or test results.
+6. Explicit confirmation of the frontend-only scope.
+7. Any remaining issues or checks that could not be completed.
+
+Deliver a finished, visually polished, responsive implementation—not just a concept or static mockup.
