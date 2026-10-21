@@ -28,6 +28,7 @@ import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import Image from "next/image";
 import { toast } from "sonner";
 import { uploadFilesToProjectDetailed, splitBySize, MAX_UPLOAD_MB, TOO_LARGE_ADVICE } from "@/lib/upload";
 import { SetupBanners } from "@/components/SetupBanners";
@@ -90,7 +91,7 @@ function ProjectThumbnail({
     setState("idle");
     if (!previewImageUrl) return;
     let cancelled = false;
-    const img = new Image();
+    const img = new window.Image();
     img.src = previewImageUrl;
     img
       .decode()
@@ -215,9 +216,13 @@ export default function DashboardPage() {
   // When false we show the setup banners instead of nagging with API errors.
   const [keyConfigured, setKeyConfigured] = useState<boolean | null>(null);
   useEffect(() => {
-    api.get<{ configured: boolean }>("/api/config").then((r) => {
-      setKeyConfigured(r.ok && r.data ? r.data.configured : false);
-    });
+    api.get<{ configured: boolean }>("/api/config")
+      .then((r) => {
+        setKeyConfigured(r.ok && r.data ? r.data.configured : false);
+      })
+      .catch(() => {
+        setKeyConfigured(false);
+      });
   }, []);
 
   /*
@@ -257,13 +262,18 @@ export default function DashboardPage() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const res = await vcaasApi.projects.list();
-    if (res.ok && res.data) {
-      const list = Array.isArray(res.data) ? res.data : [];
-      list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      setProjects(list);
+    try {
+      const res = await vcaasApi.projects.list();
+      if (res.ok && res.data) {
+        const list = Array.isArray(res.data) ? res.data : [];
+        list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        setProjects(list);
+      }
+    } catch (err) {
+      console.error("Failed to load projects:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   useEffect(() => { fetchData(); }, [fetchData]);
@@ -521,11 +531,17 @@ export default function DashboardPage() {
       {/* Header */}
       <header className="sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-12 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gray-900 flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5 text-white" />
-            </div>
-            <span className="font-semibold tracking-tight text-gray-900 text-sm">VibeBuild</span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <Image
+              src="/logo/Mavly.png"
+              alt="Mavly Logo"
+              width={28}
+              height={28}
+              className="w-7 h-7 rounded-lg object-contain shadow-xs shrink-0"
+              priority
+              referrerPolicy="no-referrer"
+            />
+            <span className="font-semibold tracking-tight text-gray-900 text-sm">Mavly</span>
           </Link>
           <div className="flex items-center gap-2">
             <Link href="/">
@@ -537,72 +553,78 @@ export default function DashboardPage() {
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
         {/* Hero prompt */}
-        {!loading && (
-          <div className={hasProjects || keyConfigured === false ? "mb-10" : "flex flex-col items-center justify-center min-h-[50vh]"}>
-            <div className="w-full max-w-2xl mx-auto">
-              <div className="text-center mb-6">
-                {!hasProjects && (
-                  <div className="w-12 h-12 rounded-2xl bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                    <Sparkles className="w-6 h-6 text-white" />
-                  </div>
-                )}
-                <h1 className={`font-bold tracking-tight text-gray-900 ${hasProjects ? "text-xl" : "text-3xl sm:text-4xl"}`}>
-                  What do you want to build?
-                </h1>
-                {!hasProjects && <p className="text-gray-500 max-w-md mx-auto mt-2 text-sm">Describe your app and AI will build it in minutes.</p>}
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-200/60 overflow-hidden">
-                <textarea
-                  ref={heroTextareaRef}
-                  value={firstPrompt}
-                  onChange={(e) => setFirstPrompt(e.target.value)}
-                  placeholder="Describe your app... e.g. 'A project management tool with kanban boards'"
-                  className="w-full min-h-[90px] sm:min-h-[110px] resize-none text-[15px] p-5 pb-2 outline-none placeholder:text-gray-400 bg-transparent"
-                  onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); openBuildModal(); } }}
-                  onPaste={handleHeroPaste}
-                />
-                {/*
-                  ⭐ The attachments, previewed. Nothing is uploaded yet here — the project
-                  does not exist — so an image is shown from the browser's own copy through
-                  an object URL. See `AttachmentPreview.tsx`.
-                */}
-                <AttachmentPreviews
-                  className="px-5 pb-2"
-                  items={attachedFiles.map((f) => ({ name: f.name, file: f.file, type: f.file.type, size: f.file.size }))}
-                  onRemove={(index) => setAttachedFiles((prev) => prev.filter((_, j) => j !== index))}
-                />
-                <div className="flex items-center justify-between px-4 py-2.5 border-t border-gray-100/80">
-                  <div className="flex items-center gap-1">
-                    <label className="cursor-pointer flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors px-1.5 py-1 rounded-lg hover:bg-gray-50">
-                      <input type="file" multiple className="hidden" onChange={handleFileSelect} accept="image/*,.pdf,.svg" />
-                      {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Paperclip className="w-4 h-4" />}
-                      <span className="hidden sm:inline">Attach</span>
-                    </label>
-                    {/* ⭐ Figma in the hero tray — pending mode, see `figmaToken`. */}
-                    <FigmaPromptButton
-                      onAdd={appendToPrompt}
-                      hasText={firstPrompt.trim().length > 0}
-                      onConnect={() => setFigmaModalOpen(true)}
-                      connected={!!figmaToken}
-                      onDisconnect={() => {
-                        setFigmaToken(null);
-                        toast.success(t("workspace.figma.pendingForgotten"));
-                      }}
-                      disconnectConfirm={t("workspace.figma.disconnectPendingConfirm")}
-                    />
-                  </div>
-                  <button onClick={openBuildModal} disabled={!firstPrompt.trim() && attachedFiles.length === 0}
-                    className="flex items-center gap-1.5 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 text-white text-xs font-medium px-4 h-8 rounded-xl transition-colors">
-                    <Send className="w-3.5 h-3.5" /><span>Build</span>
-                  </button>
+        <div className={hasProjects || keyConfigured === false ? "mb-10" : "flex flex-col items-center justify-center min-h-[50vh]"}>
+          <div className="w-full max-w-2xl mx-auto">
+            <div className="text-center mb-6">
+              {!hasProjects && (
+                <div className="w-14 h-14 rounded-2xl mx-auto mb-4 shadow-sm overflow-hidden flex items-center justify-center">
+                  <Image
+                    src="/logo/Mavly.png"
+                    alt="Mavly Logo"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-contain"
+                    priority
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
-              </div>
-
-              {/* Setup guidance — right under the prompt, only when the key is missing */}
-              {keyConfigured === false && <SetupBanners />}
+              )}
+              <h1 className={`font-bold tracking-tight text-gray-900 ${hasProjects ? "text-xl" : "text-3xl sm:text-4xl"}`}>
+                What do you want to build?
+              </h1>
+              {!hasProjects && <p className="text-gray-500 max-w-md mx-auto mt-2 text-sm">Describe your app and AI will build it in minutes.</p>}
             </div>
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-200/60 overflow-hidden">
+              <textarea
+                ref={heroTextareaRef}
+                value={firstPrompt}
+                onChange={(e) => setFirstPrompt(e.target.value)}
+                placeholder="Describe your app... e.g. 'A project management tool with kanban boards'"
+                className="w-full min-h-[90px] sm:min-h-[110px] resize-none text-[15px] p-5 pb-2 outline-none placeholder:text-gray-400 bg-transparent"
+                onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); openBuildModal(); } }}
+                onPaste={handleHeroPaste}
+              />
+              {/*
+                ⭐ The attachments, previewed. Nothing is uploaded yet here — the project
+                does not exist — so an image is shown from the browser's own copy through
+                an object URL. See `AttachmentPreview.tsx`.
+              */}
+              <AttachmentPreviews
+                className="px-5 pb-2"
+                items={attachedFiles.map((f) => ({ name: f.name, file: f.file, type: f.file.type, size: f.file.size }))}
+                onRemove={(index) => setAttachedFiles((prev) => prev.filter((_, j) => j !== index))}
+              />
+              <div className="flex items-center justify-between px-4 py-2.5 border-t border-gray-100/80">
+                <div className="flex items-center gap-1">
+                  <label className="cursor-pointer flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors px-1.5 py-1 rounded-lg hover:bg-gray-50">
+                    <input type="file" multiple className="hidden" onChange={handleFileSelect} accept="image/*,.pdf,.svg" />
+                    {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Paperclip className="w-4 h-4" />}
+                    <span className="hidden sm:inline">Attach</span>
+                  </label>
+                  {/* ⭐ Figma in the hero tray — pending mode, see `figmaToken`. */}
+                  <FigmaPromptButton
+                    onAdd={appendToPrompt}
+                    hasText={firstPrompt.trim().length > 0}
+                    onConnect={() => setFigmaModalOpen(true)}
+                    connected={!!figmaToken}
+                    onDisconnect={() => {
+                      setFigmaToken(null);
+                      toast.success(t("workspace.figma.pendingForgotten"));
+                    }}
+                    disconnectConfirm={t("workspace.figma.disconnectPendingConfirm")}
+                  />
+                </div>
+                <button onClick={openBuildModal} disabled={!firstPrompt.trim() && attachedFiles.length === 0}
+                  className="flex items-center gap-1.5 bg-gray-900 hover:bg-gray-800 disabled:bg-gray-300 text-white text-xs font-medium px-4 h-8 rounded-xl transition-colors">
+                  <Send className="w-3.5 h-3.5" /><span>Build</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Setup guidance — right under the prompt, only when the key is missing */}
+            {keyConfigured === false && <SetupBanners />}
           </div>
-        )}
+        </div>
 
         {/* Projects */}
         {hasProjects && (
@@ -848,9 +870,9 @@ export default function DashboardPage() {
           </>
         )}
 
-        {loading && (
+        {loading && hasProjects && (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-            {[1, 2, 3].map((i) => <Skeleton key={i} className="h-48 rounded-xl bg-white/40" />)}
+            {[1, 2, 3].map((i) => <Skeleton key={i} className="h-48 rounded-xl bg-gray-200/60 dark:bg-gray-800/60" />)}
           </div>
         )}
       </div>

@@ -134,6 +134,14 @@
   * {
     @apply border-border outline-ring/50;
   }
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  ::-moz-selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
   /* Numeric figures never jitter — copied from totalum-platform. */
   [data-tabular] {
     font-variant-numeric: tabular-nums;

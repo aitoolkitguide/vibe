@@ -2,7 +2,8 @@
   "name": "ai-app-builder-open",
   "description": "Open-source AI app builder \u2014 turn a prompt into a full-stack Next.js web app with built-in hosting, sandbox, database, auth, AI integration, github bidirectional, multitenant, custom domain & more. Self-hosted, no-code. A free v0 / Lovable / Bolt / Replit alternative. \u2b50",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000 -H 0.0.0.0",
+    "lint": "eslint .",
     "check-types-errors": "tsc --noEmit --skipLibCheck",
     "start": "next start",
     "build": "next build",

@@ -126,6 +126,7 @@ export async function vcaasRequest(
   return fetch(resolveVcaasUrl(path), {
     ...options,
     headers,
+    signal: options.signal || AbortSignal.timeout(10_000),
   });
 }
 

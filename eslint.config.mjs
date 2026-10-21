@@ -1,16 +1,7 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+import nextConfig from "eslint-config-next";
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextConfig,
   {
     rules: {
       // Make ESLint very permissive - only catch syntax errors
@@ -30,6 +21,10 @@ const eslintConfig = [
       "@typescript-eslint/no-this-alias": "off",
       "@typescript-eslint/ban-types": "off",
       "react-hooks/exhaustive-deps": "off",
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/purity": "off",
+      "react-hooks/refs": "off",
+      "react-hooks/immutability": "off",
       "react/no-unescaped-entities": "off",
       "react/display-name": "off",
       "react/jsx-key": "off",

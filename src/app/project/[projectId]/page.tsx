@@ -11,6 +11,7 @@ import {
   Clock, Github, Code2, ArrowLeft, Figma, Copy,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { toast } from "sonner";
 import { ChatPanel } from "@/components/workspace/ChatPanel";
 import { PreviewPanel } from "@/components/workspace/PreviewPanel";
@@ -1420,12 +1421,13 @@ export default function WorkspacePage() {
         <header data-workspace-header className="flex items-stretch shrink-0 z-10" style={{ height: 48 }}>
           {/* LEFT: aside width */}
           <div className="flex items-center gap-1.5 px-3 shrink-0" style={{ width: typeof leftHeaderWidth === "number" ? leftHeaderWidth : undefined }}>
-            <Link href="/" title={"Back"} className="h-7 w-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition-colors shrink-0">
+            <Link href="/" title="Back to Mavly" className="h-7 px-1.5 flex items-center gap-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition-colors shrink-0">
               <ArrowLeft className="w-4 h-4" />
+              <Image src="/logo/Mavly.png" alt="Mavly" width={18} height={18} className="w-4.5 h-4.5 rounded object-contain shrink-0" priority referrerPolicy="no-referrer" />
             </Link>
             <div className="relative flex-1 min-w-0" ref={menuRef}>
               <button onClick={() => setMenuOpen(!menuOpen)} className="flex items-center gap-1.5 max-w-full rounded-lg px-1.5 py-1 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-                <div className="w-5 h-5 rounded bg-gray-900 dark:bg-white flex items-center justify-center shrink-0"><Sparkles className="w-2.5 h-2.5 text-white dark:text-gray-900" /></div>
+                <Image src="/logo/Mavly.png" alt="Mavly" width={20} height={20} className="w-5 h-5 rounded object-contain shrink-0" priority referrerPolicy="no-referrer" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-200 truncate">{project.label || projectId}</span>
                 <ChevronDown className="w-3 h-3 text-gray-400 shrink-0" />
               </button>
@@ -1596,13 +1598,14 @@ export default function WorkspacePage() {
       {/* ═══ MOBILE LAYOUT: header → content → fixed switch → fixed textarea ═══ */}
       <div className="flex sm:hidden flex-col h-full">
         {/* Mobile header */}
-        <header data-workspace-header className="flex items-center gap-1 px-2 shrink-0 z-10" style={{ height: 44 }}>
-          <Link href="/" title={"Back"} className="h-7 w-7 flex items-center justify-center rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition-colors shrink-0">
+        <header data-workspace-header className="flex items-center gap-1.5 px-2 shrink-0 z-10" style={{ height: 44 }}>
+          <Link href="/" title="Back to Mavly" className="h-7 px-1.5 flex items-center gap-1.5 rounded-lg text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition-colors shrink-0">
             <ArrowLeft className="w-4 h-4" />
+            <Image src="/logo/Mavly.png" alt="Mavly" width={18} height={18} className="w-4.5 h-4.5 rounded object-contain shrink-0" priority referrerPolicy="no-referrer" />
           </Link>
           <div className="relative" ref={menuRef}>
             <button onClick={() => setMenuOpen(!menuOpen)} className="flex items-center gap-1.5 px-1.5 py-1 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-              <div className="w-5 h-5 rounded bg-gray-900 dark:bg-white flex items-center justify-center shrink-0"><Sparkles className="w-2.5 h-2.5 text-white dark:text-gray-900" /></div>
+              <Image src="/logo/Mavly.png" alt="Mavly" width={20} height={20} className="w-5 h-5 rounded object-contain shrink-0" priority referrerPolicy="no-referrer" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-200 truncate max-w-[160px]">{project.label || projectId}</span>
               <ChevronDown className="w-3 h-3 text-gray-400 shrink-0" />
             </button>
